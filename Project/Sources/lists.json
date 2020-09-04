@@ -1,0 +1,18 @@
+﻿{
+	"status": {
+		"lineHeight": 18,
+		"editable": true,
+		"items": [
+			{
+				"text": "accepted",
+				"ref": 1,
+				"editable": true
+			},
+			{
+				"text": "pending",
+				"ref": 2,
+				"editable": true
+			}
+		]
+	}
+}

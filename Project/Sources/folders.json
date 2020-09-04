@@ -1,0 +1,10 @@
+﻿{
+	"lib": {
+		"methods": [
+			"COMPILER_lib",
+			"Get 4D Resources folder",
+			"mnu Default"
+		]
+	},
+	"trash": {}
+}

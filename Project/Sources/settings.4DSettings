@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><preferences stamp="7">
+	<com.4d>
+		<deployment>
+			<options/><![CDATA[
+			
+		]]></deployment>
+		<compiler>
+			<options compilation_path="3" fat_binary="true"/>
+			<typage default_for_button="2"/>
+			<method_suffix arrays="" interprocess_arrays="" interprocess_variables="" methods="" variables=""/><![CDATA[
+			
+			
+			
+		]]></compiler>
+		<general execute_host_database_event="true"/>
+		<server>
+			<network>
+				<options publication_name="MOBILE SESSION MANAGEMENT"/>
+				<client_server use_encryption="false"/><![CDATA[
+				
+				
+			]]></network><![CDATA[
+			
+		]]></server>
+		<php ip_address="127.0.0.1"/>
+		<sql>
+			<publication port_number="19812"/><![CDATA[
+			
+		]]></sql>
+		<web>
+			<standalone_server>
+				<configuration port_number="80"/><![CDATA[
+				
+			]]></standalone_server><![CDATA[
+			
+		]]></web>
+		<interface>
+			<shortcuts>
+				<accept_input_form alt="false" command="false" ctrl="false" key_code="0" shift="false"/>
+				<cancel_input_form alt="false" command="false" ctrl="false" key_code="0" shift="false"/>
+				<add_subform alt="false" command="false" ctrl="false" key_code="0" shift="false"/><![CDATA[
+				
+				
+				
+			]]></shortcuts>
+			<user sdi_application="true"/><![CDATA[
+			
+			
+		]]></interface>
+		<database>
+			<misc standard_xpath="false"/>
+		</database><![CDATA[
+		
+		
+		
+		
+		
+		
+		
+		
+	]]></com.4d><![CDATA[
+	
+]]></preferences>

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE base SYSTEM "http://www.4d.com/dtd/2007/base.dtd" >
+<base name="MOBILE SESSION MANAGEMENT" uuid="3E1A0537278B4C94A44648B3EEFB363C" collation_locale="en">
+	<schema name="DEFAULT_SCHEMA"/>
+	<base_extra __stringCompHash="icu:63.1.0" __keywordBuildingHash="icu:63.1.0" package_name="MOBILE SESSION MANAGEMENT" structure_file_name="MOBILE SESSION MANAGEMENT" data_file_path=":MOBILE SESSION MANAGEMENT.4DD">
+		<journal_file journal_file_enabled="false"/>
+	</base_extra>
+</base>

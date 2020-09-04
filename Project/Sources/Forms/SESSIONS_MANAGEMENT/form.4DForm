@@ -1,0 +1,204 @@
+﻿{
+	"destination": "detailScreen",
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"markerHeader": 15,
+	"markerBody": 200,
+	"markerBreak": 220,
+	"markerFooter": 240,
+	"events": [
+		"onLoad",
+		"onActivate",
+		"onTimer"
+	],
+	"method": "method.4dm",
+	"pageFormat": {
+		"paperName": "A4",
+		"paperWidth": "842pt",
+		"paperHeight": "595pt"
+	},
+	"pages": [
+		null,
+		{
+			"objects": {
+				"applicationList": {
+					"type": "dropdown",
+					"top": 23,
+					"left": 86,
+					"width": 347,
+					"height": 22,
+					"sizingX": "grow",
+					"focusable": false,
+					"method": "ObjectMethods/applicationList.4dm",
+					"events": [
+						"onDataChange"
+					]
+				},
+				"refresh1": {
+					"type": "button",
+					"top": 23,
+					"left": 453,
+					"width": 83,
+					"height": 22,
+					"sizingX": "move",
+					"text": "Push",
+					"focusable": false,
+					"defaultButton": true,
+					"method": "ObjectMethods/refresh1.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"refresh": {
+					"type": "button",
+					"top": 23,
+					"left": 556,
+					"width": 103,
+					"height": 22,
+					"sizingX": "move",
+					"text": "Refresh",
+					"focusable": false,
+					"method": "ObjectMethods/refresh.4dm",
+					"events": [
+						"onClick"
+					]
+				},
+				"sessionList": {
+					"type": "listbox",
+					"top": 62,
+					"left": 20,
+					"width": 639,
+					"height": 371,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"resizingMode": "legacy",
+					"listboxType": "collection",
+					"hideFocusRing": true,
+					"movableRows": false,
+					"rowHeight": "20px",
+					"headerHeight": "2em",
+					"dataSource": "Form:C1466.sessions",
+					"currentItemSource": "Form:C1466.selected",
+					"selectionMode": "single",
+					"scrollbarHorizontal": "hidden",
+					"scrollbarVertical": "automatic",
+					"horizontalLineStroke": "transparent",
+					"rowStyleSource": "Choose:C955(This:C1470.status=\"accepted\"; 1; 0)",
+					"method": "ObjectMethods/sessionList.4dm",
+					"events": [
+						"onClick",
+						"onDataChange",
+						"onMouseEnter",
+						"onMouseLeave",
+						"onMouseMove"
+					],
+					"columns": [
+						{
+							"name": "device",
+							"dataSource": "This:C1470.device.description",
+							"width": 120,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"enterable": false,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Header3",
+								"text": "Device",
+								"fontWeight": "bold"
+							},
+							"footer": {
+								"name": "Footer3",
+								"timeFormat": "hh_mm_ss"
+							}
+						},
+						{
+							"name": "status",
+							"dataSource": "This:C1470.status",
+							"choiceList": {
+								"$ref": "/SOURCES/lists.json#/status"
+							},
+							"width": 120,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"requiredList": {
+								"$ref": "/SOURCES/lists.json#/status"
+							},
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Header2",
+								"text": "Status",
+								"fontWeight": "bold"
+							},
+							"footer": {
+								"name": "Footer2",
+								"timeFormat": "hh_mm_ss"
+							}
+						},
+						{
+							"name": "iOS",
+							"dataSource": "This:C1470.device.version",
+							"width": 147,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"enterable": false,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Header4",
+								"text": "iOS",
+								"fontWeight": "bold"
+							},
+							"footer": {
+								"name": "Footer4",
+								"timeFormat": "hh_mm_ss"
+							}
+						},
+						{
+							"name": "email",
+							"dataSource": "This:C1470.email",
+							"width": 252,
+							"minWidth": 10,
+							"maxWidth": 32000,
+							"enterable": false,
+							"events": [
+								"onClick",
+								"onDataChange"
+							],
+							"header": {
+								"name": "Header1",
+								"text": "E-mail",
+								"fontWeight": "bold"
+							},
+							"footer": {
+								"name": "Footer1",
+								"timeFormat": "hh_mm_ss"
+							}
+						}
+					]
+				},
+				"Text": {
+					"type": "text",
+					"top": 26,
+					"left": 19,
+					"width": 57,
+					"height": 17,
+					"textAlign": "right",
+					"text": "Apps:"
+				}
+			}
+		}
+	],
+	"geometryStamp": 23,
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	}
+}
