@@ -1,4 +1,4 @@
-﻿{
+{
 	"destination": "detailScreen",
 	"rightMargin": 20,
 	"bottomMargin": 20,
@@ -142,7 +142,7 @@
 						},
 						{
 							"name": "iOS",
-							"dataSource": "This:C1470.device.version",
+							"dataSource": "This:C1470.device.os+\" \"+This:C1470.device.version",
 							"width": 147,
 							"minWidth": 10,
 							"maxWidth": 32000,
@@ -153,13 +153,14 @@
 							],
 							"header": {
 								"name": "Header4",
-								"text": "iOS",
+								"text": "OS",
 								"fontWeight": "bold"
 							},
 							"footer": {
 								"name": "Footer4",
 								"timeFormat": "hh_mm_ss"
-							}
+							},
+							"textAlign": "center"
 						},
 						{
 							"name": "email",
@@ -200,5 +201,12 @@
 	"$4d": {
 		"version": "1",
 		"kind": "form"
+	},
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
 	}
 }

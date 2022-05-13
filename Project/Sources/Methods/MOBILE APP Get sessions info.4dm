@@ -10,7 +10,7 @@
 // & devices sessions
 // ----------------------------------------------------
 // Declarations
-var $0 : Object
+#DECLARE() : Object
 
 If (False:C215)
 	C_OBJECT:C1216(MOBILE APP Get sessions info; $0)
@@ -18,15 +18,13 @@ End if
 
 var $text : Text
 var $application; $infos; $session : Object
-
-var $folder; $mobileApps : 4D:C1709.Directory
 var $file : 4D:C1709.Document
+var $folder; $mobileApps : 4D:C1709.Folder
 
-// NO PARAMETERS REQUIRED
+// ----------------------------------------------------
 $infos:=New object:C1471(\
 "apps"; New collection:C1472)
 
-// ----------------------------------------------------
 $mobileApps:=Folder:C1567(fk mobileApps folder:K87:18; *)
 
 If ($mobileApps.exists)
@@ -49,26 +47,20 @@ If ($mobileApps.exists)
 				If (Match regex:C1019("(?msi)^\\{.*\\}$"; $text; 1))
 					
 					$session:=JSON Parse:C1218($text)
+					
 					$application.sessions.push($session)
 					
 				End if 
 			End if 
 		End for each 
 		
-		If ($application.sessions.length>0)
+		If ($infos.apps.query("name = :1"; $application.name).pop()=Null:C1517)
 			
-			$application.name:=$session.application.name+" ("+$application.name+")"
+			$infos.apps.push($application)
 			
 		End if 
-		
-		$infos.apps.push($application)
 		
 	End for each 
 End if 
 
-// ----------------------------------------------------
-// Return
-$0:=$infos
-
-// ----------------------------------------------------
-// End
+return $infos

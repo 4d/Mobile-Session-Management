@@ -20,7 +20,7 @@ End if
 var $action : Text
 var $session : Object
 
-var $file; $scheme : 4D:C1709.Document
+var $file; $scheme : 4D:C1709.File
 
 // ----------------------------------------------------
 // Initialisations
@@ -57,7 +57,7 @@ Case of
 	: ($action="update")
 		
 		// Get the schema for sessions
-		$scheme:=Folder:C1567(Get 4D Resources folder; fk platform path:K87:2).file("JSONSchemas/mobileSessionSchema.json")
+		$scheme:=Get 4D Resources folder.file("JSONSchemas/mobileSessionSchema.json")
 		
 		If (JSON Validate:C1456($session; JSON Parse:C1218($scheme.getText())).success)
 			
