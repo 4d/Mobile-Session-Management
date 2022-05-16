@@ -29,6 +29,8 @@ $mobileApps:=Folder:C1567(fk mobileApps folder:K87:18; *)
 
 If ($mobileApps.exists)
 	
+	applicationUpdate
+	
 	// Each folder corresponds to an application
 	For each ($folder; $mobileApps.folders())
 		
