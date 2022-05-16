@@ -4,99 +4,73 @@
 // ID[CA20DED5061E47EDA9B0B29E8B2A573F]
 // Created #7-6-2018 by Vincent de Lachaux
 // ----------------------------------------------------
-// Declarations
-var $current : Text
-var $index : Integer
-var $ptr : Pointer
-var $e; $infos : Object
+var $e : Object
 
-// ----------------------------------------------------
-// Initialisations
 $e:=FORM Event:C1606
-
-// ----------------------------------------------------
 
 Case of 
 		
 		//______________________________________________________
 	: ($e.code=On Load:K2:1)
 		
-		//
+		Form:C1466.applications:=New object:C1471  // Apps' drop-down data source
+		Form:C1466.sessions:=New collection:C1472  // Sessions list's data source
+		
+		// Load the json schema for a mobile session
+		Form:C1466.scheme:=JSON Parse:C1218(Get 4D Resources folder.file("JSONSchemas/mobileSessionSchema.json").getText())
+		
+		// The current session file assessor
+		Form:C1466.currentSessionFile:=Formula:C1597(Folder:C1567(fk mobileApps folder:K87:18; *)\
+			.folder(Form:C1466.applications.values[Form:C1466.applications.index])\
+			.file(Form:C1466.sessionCurrent.session.id))
+		
+		Form:C1466.refresh:=Formula:C1597(SET TIMER:C645(-1))
 		
 		//______________________________________________________
 	: ($e.code=On Activate:K2:9)
 		
-		SET TIMER:C645(-1)
+		Form:C1466.refresh()
 		
 		//______________________________________________________
 	: ($e.code=On Timer:K2:25)
 		
 		SET TIMER:C645(0)
 		
-		$ptr:=OBJECT Get pointer:C1124(Object named:K67:5; "applicationList")
-		
-		// Keep the selected session id, if any
-		If (Form:C1466.selected#Null:C1517)
-			
-			$current:=String:C10(Form:C1466.selected.session.id)
-			
-		End if 
+		// Keep the current slected application
+		Form:C1466.applicationCurrent:=String:C10(Form:C1466.applications.currentValue)
 		
 		// Retrieve the sessions informations
-		$infos:=MOBILE APP Get sessions info
+		Form:C1466.infos:=MOBILE APP Get sessions info
 		
-		If ($infos.apps#Null:C1517)
+		If (Form:C1466.infos.apps.length>0)
 			
-			Case of 
-					
-					//______________________________________________________
-				: ($infos.apps.length=0)
-					
-					// Empty the list of applications and sessions
-					CLEAR VARIABLE:C89($ptr->)
-					Form:C1466.sessions:=New collection:C1472
-					
-					//______________________________________________________
-				: ($infos.apps.length=1)
-					
-					// Populate the application list
-					COLLECTION TO ARRAY:C1562($infos.apps.extract("name"); $ptr->)
-					$ptr->:=1
-					
-					// Load the sessions
-					Form:C1466.sessions:=$infos.apps[0].sessions
-					
-					//______________________________________________________
-				Else 
-					
-					// Get current selected application
-					//%W-533.3
-					$index:=$infos.apps.extract("name").indexOf($ptr->{$ptr->})
-					//%W+533.3
-					
-					// Select first one if none selected
-					$index:=Choose:C955($index=-1; 0; $index)
-					
-					COLLECTION TO ARRAY:C1562($infos.apps.extract("name"); $ptr->)
-					
-					// Select & load the sessions
-					$ptr->:=$index+1
-					Form:C1466.sessions:=$infos.apps[$index].sessions
-					
-					//______________________________________________________
-			End case 
+			Form:C1466.applications.values:=Form:C1466.infos.apps.extract("name")
+			Form:C1466.applications.index:=Form:C1466.infos.apps.extract("name").indexOf(Form:C1466.applicationCurrent)
 			
-			// Restore selection
-			LISTBOX SELECT ROW:C912(*; "sessionList"; Form:C1466.sessions.extract("session.id").indexOf($current); lk replace selection:K53:1)
+			If (Form:C1466.applications.index>=0)
+				
+				Form:C1466.applications.currentValue:=Form:C1466.applicationCurrent
+				
+				// Load the application's sessions
+				Form:C1466.sessions:=Form:C1466.infos.apps[Form:C1466.applications.index].sessions
+				
+			Else 
+				
+				Form:C1466.applications.currentValue:="Select an application"
+				Form:C1466.sessions:=New collection:C1472
+				
+			End if 
 			
 		Else 
 			
-			// Empty the list of applications, sessions and selection
-			CLEAR VARIABLE:C89($ptr->)
+			Form:C1466.applications.values:=New object:C1471
+			Form:C1466.applications.index:=-1
+			Form:C1466.applications.currentValue:="No application session"
 			Form:C1466.sessions:=New collection:C1472
-			LISTBOX SELECT ROW:C912(*; "sessionList"; 0; lk remove from selection:K53:3)
 			
 		End if 
+		
+		LISTBOX SELECT ROW:C912(*; "sessionList"; 0; lk remove from selection:K53:3)
 		
 		//______________________________________________________
 	Else 

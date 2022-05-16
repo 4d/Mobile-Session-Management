@@ -1,1 +1,1 @@
-SET TIMER:C645(-1)
+Form:C1466.refresh()

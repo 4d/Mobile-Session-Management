@@ -4,19 +4,15 @@
 // ID[3DDEC3316FE549669FB0156E14295696]
 // Created #12-6-2018 by Vincent de Lachaux
 // ----------------------------------------------------
-// Declarations
 var $choice; $me; $popup : Text
 var $button; $column; $row; $x; $y : Integer
 var $e : Object
 
-var $file : 4D:C1709.Document
-
-// ----------------------------------------------------
-// Initialisations
 $e:=FORM Event:C1606
 $me:=OBJECT Get name:C1087(Object current:K67:2)
 
-// ----------------------------------------------------
+LISTBOX GET CELL POSITION:C971(*; $me; $column; $row)
+
 Case of 
 		
 		//______________________________________________________
@@ -24,13 +20,11 @@ Case of
 		
 		If (Contextual click:C713)
 			
-			LISTBOX GET CELL POSITION:C971(*; $me; $column; $row)
-			
 			$popup:=Create menu:C408
 			
 			If ($row>0)
 				
-				APPEND MENU ITEM:C411($popup; "Show on disk")
+				APPEND MENU ITEM:C411($popup; "Show on disk…")
 				SET MENU ITEM PARAMETER:C1004($popup; -1; "show")
 				
 				APPEND MENU ITEM:C411($popup; "-")
@@ -49,37 +43,22 @@ Case of
 			RELEASE MENU:C978($popup)
 			
 			Case of 
-					//………………………………………………………………………………………
-				: (Length:C16($choice)=0)
-					
-					// nothing selected
 					
 					//………………………………………………………………………………………
-				: ($choice="delete")
+				: ($choice="delete")  // Delete the session file
 					
-					// Delete the session file
-					MOBILE APP SESSION UPDATE(Form:C1466.selected; "delete")
-					
-					// Refresh UI
-					SET TIMER:C645(-1)
+					Form:C1466.currentSessionFile().delete()
+					Form:C1466.refresh()
 					
 					//………………………………………………………………………………………
 				: ($choice="show")
 					
-					$file:=Folder:C1567(fk mobileApps folder:K87:18; *).file(Choose:C955(Length:C16(Form:C1466.selected.team.id)>0; Form:C1466.selected.team.id+"."; "")\
-						+Form:C1466.selected.application.id+"/"+Form:C1466.selected.session.id)
-					
-					SHOW ON DISK:C922($file.platformPath)
+					SHOW ON DISK:C922(Form:C1466.currentSessionFile().platformPath)
 					
 					//………………………………………………………………………………………
 				: ($choice="refresh")
 					
-					SET TIMER:C645(-1)
-					
-					//………………………………………………………………………………………
-				Else 
-					
-					ASSERT:C1129(False:C215; "Unknown menu action ("+$choice+")")
+					Form:C1466.refresh()
 					
 					//………………………………………………………………………………………
 			End case 
@@ -96,7 +75,6 @@ Case of
 		
 		// Set tips content according to the line over
 		GET MOUSE:C468($x; $y; $button)
-		LISTBOX GET CELL POSITION:C971(*; $me; $x; $y; $column; $row)
 		
 		If ($row=0)\
 			 | ($column=2)  // Not for status
@@ -116,13 +94,18 @@ Case of
 		SET DATABASE PARAMETER:C642(Tips delay:K37:80; 45)
 		
 		//______________________________________________________
-	: ($e.code=On Data Change:K2:15)
+	: ($e.code=On Data Change:K2:15)  // Update the session file
 		
-		// Update the session file
-		MOBILE APP SESSION UPDATE(Form:C1466.selected)
-		
-		// Refresh UI
-		SET TIMER:C645(-1)
+		If (JSON Validate:C1456(Form:C1466.sessionCurrent; Form:C1466.scheme).success)
+			
+			Form:C1466.currentSessionFile().setText(JSON Stringify:C1217(Form:C1466.sessionCurrent; *))
+			Form:C1466.refresh()
+			
+		Else 
+			
+			ALERT:C41("Invalid session object")
+			
+		End if 
 		
 		//______________________________________________________
 	Else 

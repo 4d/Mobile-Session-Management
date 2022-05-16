@@ -32,9 +32,11 @@
 					"method": "ObjectMethods/applicationList.4dm",
 					"events": [
 						"onDataChange"
-					]
+					],
+					"dataSourceTypeHint": "object",
+					"dataSource": "Form:C1466.applications"
 				},
-				"refresh1": {
+				"push": {
 					"type": "button",
 					"top": 23,
 					"left": 453,
@@ -44,7 +46,7 @@
 					"text": "Push",
 					"focusable": false,
 					"defaultButton": true,
-					"method": "ObjectMethods/refresh1.4dm",
+					"method": "ObjectMethods/push.4dm",
 					"events": [
 						"onClick"
 					]
@@ -78,7 +80,7 @@
 					"rowHeight": "20px",
 					"headerHeight": "2em",
 					"dataSource": "Form:C1466.sessions",
-					"currentItemSource": "Form:C1466.selected",
+					"currentItemSource": "Form:C1466.sessionCurrent",
 					"selectionMode": "single",
 					"scrollbarHorizontal": "hidden",
 					"scrollbarVertical": "automatic",
@@ -92,6 +94,7 @@
 						"onMouseLeave",
 						"onMouseMove"
 					],
+					"currentItemPositionSource": "Form:C1466.sessionIndex",
 					"columns": [
 						{
 							"name": "device",
@@ -138,7 +141,8 @@
 							"footer": {
 								"name": "Footer2",
 								"timeFormat": "hh_mm_ss"
-							}
+							},
+							"textAlign": "center"
 						},
 						{
 							"name": "iOS",
@@ -197,7 +201,7 @@
 			}
 		}
 	],
-	"geometryStamp": 23,
+	"geometryStamp": 24,
 	"$4d": {
 		"version": "1",
 		"kind": "form"

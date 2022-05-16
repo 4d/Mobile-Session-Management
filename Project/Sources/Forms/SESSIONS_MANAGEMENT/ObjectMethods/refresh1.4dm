@@ -1,4 +1,0 @@
-// Call 4D to update the sessions
-MOBILE APP REFRESH SESSIONS:C1596
-
-SET TIMER:C645(-1)

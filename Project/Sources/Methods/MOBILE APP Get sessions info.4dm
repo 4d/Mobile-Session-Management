@@ -17,7 +17,7 @@ If (False:C215)
 End if 
 
 var $text : Text
-var $application; $infos; $session : Object
+var $application; $infos : Object
 var $file : 4D:C1709.Document
 var $folder; $mobileApps : 4D:C1709.Folder
 
@@ -46,9 +46,7 @@ If ($mobileApps.exists)
 				
 				If (Match regex:C1019("(?msi)^\\{.*\\}$"; $text; 1))
 					
-					$session:=JSON Parse:C1218($text)
-					
-					$application.sessions.push($session)
+					$application.sessions.push(JSON Parse:C1218($text))
 					
 				End if 
 			End if 
