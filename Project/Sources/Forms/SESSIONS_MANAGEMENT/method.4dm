@@ -26,6 +26,8 @@ Case of
 		
 		Form:C1466.refresh:=Formula:C1597(SET TIMER:C645(-1))
 		
+		OBJECT SET ENABLED:C1123(*; "push"; False:C215)
+		
 		//______________________________________________________
 	: ($e.code=On Activate:K2:9)
 		
@@ -36,8 +38,8 @@ Case of
 		
 		SET TIMER:C645(0)
 		
-		// Keep the current slected application
-		Form:C1466.applicationCurrent:=String:C10(Form:C1466.applications.currentValue)
+		// Keep the current selected application
+		Form:C1466.currentApp:=String:C10(Form:C1466.applications.currentValue)
 		
 		// Retrieve the sessions informations
 		Form:C1466.infos:=MOBILE APP Get sessions info
@@ -45,21 +47,11 @@ Case of
 		If (Form:C1466.infos.apps.length>0)
 			
 			Form:C1466.applications.values:=Form:C1466.infos.apps.extract("name")
-			Form:C1466.applications.index:=Form:C1466.infos.apps.extract("name").indexOf(Form:C1466.applicationCurrent)
+			Form:C1466.applications.index:=Form:C1466.applications.values.indexOf(Form:C1466.currentApp)
+			Form:C1466.applications.index:=Form:C1466.applications.index=-1 ? 0 : Form:C1466.applications.index  // The first available for the first time
 			
-			If (Form:C1466.applications.index>=0)
-				
-				Form:C1466.applications.currentValue:=Form:C1466.applicationCurrent
-				
-				// Load the application's sessions
-				Form:C1466.sessions:=Form:C1466.infos.apps[Form:C1466.applications.index].sessions
-				
-			Else 
-				
-				Form:C1466.applications.currentValue:="Select an application"
-				Form:C1466.sessions:=New collection:C1472
-				
-			End if 
+			// Load the application's sessions
+			Form:C1466.sessions:=Form:C1466.infos.apps[Form:C1466.applications.index].sessions
 			
 		Else 
 			

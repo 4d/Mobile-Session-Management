@@ -21,12 +21,26 @@
 		null,
 		{
 			"objects": {
+				"refresh": {
+					"type": "button",
+					"top": 22,
+					"left": 453,
+					"width": 103,
+					"height": 22,
+					"sizingX": "move",
+					"text": "Refresh",
+					"focusable": false,
+					"method": "ObjectMethods/refresh.4dm",
+					"events": [
+						"onClick"
+					]
+				},
 				"applicationList": {
 					"type": "dropdown",
-					"top": 23,
+					"top": 20,
 					"left": 86,
-					"width": 347,
-					"height": 22,
+					"width": 333,
+					"height": 27,
 					"sizingX": "grow",
 					"focusable": false,
 					"method": "ObjectMethods/applicationList.4dm",
@@ -38,8 +52,8 @@
 				},
 				"push": {
 					"type": "button",
-					"top": 23,
-					"left": 453,
+					"top": 22,
+					"left": 576,
 					"width": 83,
 					"height": 22,
 					"sizingX": "move",
@@ -47,20 +61,6 @@
 					"focusable": false,
 					"defaultButton": true,
 					"method": "ObjectMethods/push.4dm",
-					"events": [
-						"onClick"
-					]
-				},
-				"refresh": {
-					"type": "button",
-					"top": 23,
-					"left": 556,
-					"width": 103,
-					"height": 22,
-					"sizingX": "move",
-					"text": "Refresh",
-					"focusable": false,
-					"method": "ObjectMethods/refresh.4dm",
 					"events": [
 						"onClick"
 					]
@@ -73,7 +73,6 @@
 					"height": 371,
 					"sizingX": "grow",
 					"sizingY": "grow",
-					"resizingMode": "legacy",
 					"listboxType": "collection",
 					"hideFocusRing": true,
 					"movableRows": false,
@@ -100,8 +99,8 @@
 							"name": "device",
 							"dataSource": "This:C1470.device.description",
 							"width": 120,
-							"minWidth": 10,
-							"maxWidth": 32000,
+							"minWidth": 120,
+							"maxWidth": 300,
 							"enterable": false,
 							"events": [
 								"onClick",
@@ -124,8 +123,8 @@
 								"$ref": "/SOURCES/lists.json#/status"
 							},
 							"width": 120,
-							"minWidth": 10,
-							"maxWidth": 32000,
+							"minWidth": 120,
+							"maxWidth": 120,
 							"requiredList": {
 								"$ref": "/SOURCES/lists.json#/status"
 							},
@@ -142,14 +141,15 @@
 								"name": "Footer2",
 								"timeFormat": "hh_mm_ss"
 							},
-							"textAlign": "center"
+							"textAlign": "center",
+							"resizable": false
 						},
 						{
 							"name": "iOS",
-							"dataSource": "This:C1470.device.os+\" \"+This:C1470.device.version",
-							"width": 147,
-							"minWidth": 10,
-							"maxWidth": 32000,
+							"dataSource": "This:C1470.device.os+\" \"+String:C10(This:C1470.device.version)",
+							"width": 150,
+							"minWidth": 150,
+							"maxWidth": 300,
 							"enterable": false,
 							"events": [
 								"onClick",
@@ -169,9 +169,9 @@
 						{
 							"name": "email",
 							"dataSource": "This:C1470.email",
-							"width": 252,
+							"width": 150,
 							"minWidth": 10,
-							"maxWidth": 32000,
+							"maxWidth": 250,
 							"enterable": false,
 							"events": [
 								"onClick",
@@ -191,17 +191,23 @@
 				},
 				"Text": {
 					"type": "text",
-					"top": 26,
+					"top": 25,
 					"left": 19,
 					"width": 57,
 					"height": 17,
 					"textAlign": "right",
 					"text": "Apps:"
 				}
-			}
+			},
+			"entryOrder": [
+				"applicationList",
+				"sessionList",
+				"refresh",
+				"push"
+			]
 		}
 	],
-	"geometryStamp": 24,
+	"geometryStamp": 34,
 	"$4d": {
 		"version": "1",
 		"kind": "form"

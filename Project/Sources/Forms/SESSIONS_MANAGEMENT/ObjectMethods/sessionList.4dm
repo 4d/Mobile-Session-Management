@@ -101,6 +101,8 @@ Case of
 			Form:C1466.currentSessionFile().setText(JSON Stringify:C1217(Form:C1466.sessionCurrent; *))
 			Form:C1466.refresh()
 			
+			OBJECT SET ENABLED:C1123(*; "push"; True:C214)  // Ready to push
+			
 		Else 
 			
 			ALERT:C41("Invalid session object")
