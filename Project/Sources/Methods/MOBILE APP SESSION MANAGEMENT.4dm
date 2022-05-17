@@ -24,12 +24,11 @@ Case of
 		// First launch of this method executed in a new process
 		var $data : Object
 		$data:=New object:C1471
-		$data.menuBar:=mnu Default
-		SET MENU BAR:C67($data.menuBar)
+		SET MENU BAR:C67(1)
 		$data.window:=Open form window:C675("SESSIONS_MANAGEMENT"; Plain form window:K39:10; Horizontally centered:K39:1; Vertically centered:K39:4; *)
 		DIALOG:C40("SESSIONS_MANAGEMENT"; $data)
 		CLOSE WINDOW:C154
-		RELEASE MENU:C978($data.menuBar)
+		RELEASE MENU:C978(Get menu bar reference:C979)
 		
 		//___________________________________________________________
 	Else 

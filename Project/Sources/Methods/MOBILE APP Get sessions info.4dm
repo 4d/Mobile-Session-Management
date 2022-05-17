@@ -7,7 +7,7 @@
 // ----------------------------------------------------
 // Description:
 // Returns an object containing detailed information on mobile applications
-// & devices sessions
+// & associated devices' sessions
 // ----------------------------------------------------
 // Declarations
 #DECLARE() : Object
@@ -17,8 +17,8 @@ If (False:C215)
 End if 
 
 var $text : Text
-var $application; $infos : Object
-var $file : 4D:C1709.Document
+var $app; $infos; $session : Object
+var $file : 4D:C1709.File
 var $folder; $mobileApps : 4D:C1709.Folder
 
 // ----------------------------------------------------
@@ -29,12 +29,10 @@ $mobileApps:=Folder:C1567(fk mobileApps folder:K87:18; *)
 
 If ($mobileApps.exists)
 	
-	applicationUpdate
-	
-	// Each folder corresponds to an application
+	// Each folder whose name begins with "com." corresponds to an application
 	For each ($folder; $mobileApps.folders())
 		
-		$application:=New object:C1471(\
+		$app:=New object:C1471(\
 			"name"; $folder.fullName; \
 			"id"; $folder.fullName; \
 			"sessions"; New collection:C1472)
@@ -42,24 +40,28 @@ If ($mobileApps.exists)
 		// Each file, without extension, should correspond to a session
 		For each ($file; $folder.files().query("extension =''"))
 			
-			If (Match regex:C1019("(?mi-s)^[[:xdigit:]]+$"; $file.name; 1))
+			// Check that the file name is composed of hexadecimal characters only
+			If (Match regex:C1019("(?mi-s)^[[:xdigit:]]+$"; $file.name; 1; *))
 				
+				// Make sure it's a json
 				$text:=$file.getText()
 				
-				If (Match regex:C1019("(?msi)^\\{.*\\}$"; $text; 1))
+				If (Match regex:C1019("(?msi)^\\{.*\\}$"; $text; 1; *))
 					
-					$application.sessions.push(JSON Parse:C1218($text))
+					$session:=JSON Parse:C1218($text)
+					$app.sessions.push($session)
 					
 				End if 
 			End if 
 		End for each 
 		
-		If ($infos.apps.query("name = :1"; $application.name).pop()=Null:C1517)
+		If ($app.sessions.length>0)\
+			 && ($infos.apps.query("name = :1"; $app.name).pop()=Null:C1517)
 			
-			$infos.apps.push($application)
+			$app.label:=$session.application.name+" ("+$folder.name+")"
+			$infos.apps.push($app)
 			
 		End if 
-		
 	End for each 
 End if 
 

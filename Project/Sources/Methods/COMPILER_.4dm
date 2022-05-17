@@ -12,5 +12,7 @@ If (False:C215)
 	C_TEXT:C284(MOBILE APP SESSION UPDATE; $2)
 	
 	//_______________________________________
+	C_OBJECT:C1216(Get 4D Resources folder; $0)
+	
+	//_______________________________________
 End if 
-

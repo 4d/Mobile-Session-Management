@@ -33,7 +33,12 @@
 					"method": "ObjectMethods/refresh.4dm",
 					"events": [
 						"onClick"
-					]
+					],
+					"shortcutAccel": true,
+					"shortcutControl": false,
+					"shortcutShift": false,
+					"shortcutAlt": false,
+					"shortcutKey": "r"
 				},
 				"applicationList": {
 					"type": "dropdown",
@@ -107,7 +112,7 @@
 								"onDataChange"
 							],
 							"header": {
-								"name": "Header3",
+								"name": "deviceHeader",
 								"text": "Device",
 								"fontWeight": "bold"
 							},
@@ -133,7 +138,7 @@
 								"onDataChange"
 							],
 							"header": {
-								"name": "Header2",
+								"name": "statusHeader",
 								"text": "Status",
 								"fontWeight": "bold"
 							},
@@ -145,18 +150,17 @@
 							"resizable": false
 						},
 						{
-							"name": "iOS",
+							"name": "os",
 							"dataSource": "This:C1470.device.os+\" \"+String:C10(This:C1470.device.version)",
 							"width": 150,
 							"minWidth": 150,
 							"maxWidth": 300,
 							"enterable": false,
 							"events": [
-								"onClick",
-								"onDataChange"
+								"onHeaderClick"
 							],
 							"header": {
-								"name": "Header4",
+								"name": "osHeader",
 								"text": "OS",
 								"fontWeight": "bold"
 							},
@@ -164,7 +168,8 @@
 								"name": "Footer4",
 								"timeFormat": "hh_mm_ss"
 							},
-							"textAlign": "center"
+							"textAlign": "center",
+							"method": "ObjectMethods/os.4dm"
 						},
 						{
 							"name": "email",
@@ -172,13 +177,12 @@
 							"width": 150,
 							"minWidth": 10,
 							"maxWidth": 250,
-							"enterable": false,
 							"events": [
 								"onClick",
 								"onDataChange"
 							],
 							"header": {
-								"name": "Header1",
+								"name": "emailHeader",
 								"text": "E-mail",
 								"fontWeight": "bold"
 							},
@@ -207,7 +211,7 @@
 			]
 		}
 	],
-	"geometryStamp": 34,
+	"geometryStamp": 41,
 	"$4d": {
 		"version": "1",
 		"kind": "form"
