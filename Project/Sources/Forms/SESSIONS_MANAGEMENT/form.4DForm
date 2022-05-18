@@ -105,7 +105,7 @@
 							"dataSource": "This:C1470.device.description",
 							"width": 120,
 							"minWidth": 120,
-							"maxWidth": 300,
+							"maxWidth": 600,
 							"enterable": false,
 							"events": [
 								"onClick",
