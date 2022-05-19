@@ -48,6 +48,8 @@ Case of
 				: ($choice="delete")  // Delete the session file
 					
 					Form:C1466.currentSessionFile().delete()
+					OBJECT SET ENABLED:C1123(*; "push"; True:C214)  // Ready to push
+					
 					Form:C1466.refresh()
 					
 					//………………………………………………………………………………………
